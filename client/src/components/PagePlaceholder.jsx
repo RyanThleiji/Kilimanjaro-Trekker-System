@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import BackToHome from './BackToHome.jsx';
 
 export default function PagePlaceholder({ title, children }) {
   return (
@@ -8,9 +8,7 @@ export default function PagePlaceholder({ title, children }) {
 
       {/* TODO: Replace this placeholder with the real feature UI. */}
 
-      <Link className="back-link" to="/">
-        Back to Dashboard
-      </Link>
+      <BackToHome />
     </main>
   );
 }

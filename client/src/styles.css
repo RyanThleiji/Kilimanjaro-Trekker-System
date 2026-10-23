@@ -25,4 +25,19 @@ body {
 .back-link {
   display: inline-block;
   margin-top: 24px;
+  padding: 10px 16px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #fff;
+  background: #333;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  background: #111;
+}
+
+.back-link:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
 }
