@@ -1,9 +1,10 @@
 import { Router } from 'express';
+import { getFacilities, createFacility } from '../controllers/facilityController.js';
 import { notImplemented } from '../controllers/placeholderController.js';
 
 const router = Router();
 
-// TODO: Replace placeholder handlers with real controller functions.
+// Collection GET/POST are implemented; individual read/update/delete remain scaffolded.
 // CRUD reference for Facility:
 // GET    /api/facilities
 // GET    /api/facilities/:id
@@ -11,9 +12,9 @@ const router = Router();
 // PUT    /api/facilities/:id
 // DELETE /api/facilities/:id
 
-router.get('/', notImplemented);
+router.get('/', getFacilities);
 router.get('/:id', notImplemented);
-router.post('/', notImplemented);
+router.post('/', createFacility);
 router.put('/:id', notImplemented);
 router.delete('/:id', notImplemented);
 

@@ -1,9 +1,10 @@
 import { Router } from 'express';
+import { getWeatherReadings, createWeatherReading } from '../controllers/weatherController.js';
 import { notImplemented } from '../controllers/placeholderController.js';
 
 const router = Router();
 
-// TODO: Replace placeholder handlers with real controller functions.
+// Collection GET/POST are implemented; individual read/update/delete remain scaffolded.
 // CRUD reference for WeatherReading:
 // GET    /api/weather-readings
 // GET    /api/weather-readings/:id
@@ -11,9 +12,9 @@ const router = Router();
 // PUT    /api/weather-readings/:id
 // DELETE /api/weather-readings/:id
 
-router.get('/', notImplemented);
+router.get('/', getWeatherReadings);
 router.get('/:id', notImplemented);
-router.post('/', notImplemented);
+router.post('/', createWeatherReading);
 router.put('/:id', notImplemented);
 router.delete('/:id', notImplemented);
 

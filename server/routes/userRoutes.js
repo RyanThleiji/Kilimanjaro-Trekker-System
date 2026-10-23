@@ -1,9 +1,10 @@
 import { Router } from 'express';
+import { getUsers, createUser } from '../controllers/userController.js';
 import { notImplemented } from '../controllers/placeholderController.js';
 
 const router = Router();
 
-// TODO: Replace placeholder handlers with real controller functions.
+// Collection GET/POST are implemented; individual read/update/delete remain scaffolded.
 // CRUD reference for User:
 // GET    /api/users
 // GET    /api/users/:id
@@ -11,9 +12,9 @@ const router = Router();
 // PUT    /api/users/:id
 // DELETE /api/users/:id
 
-router.get('/', notImplemented);
+router.get('/', getUsers);
 router.get('/:id', notImplemented);
-router.post('/', notImplemented);
+router.post('/', createUser);
 router.put('/:id', notImplemented);
 router.delete('/:id', notImplemented);
 

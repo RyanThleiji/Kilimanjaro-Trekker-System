@@ -1,6 +1,43 @@
 # KTS API Route Reference
 
-These are the planned REST routes. Most currently return HTTP 501 until implemented.
+Collection GET and POST routes are implemented for all seven models. GET returns
+an array (200); POST returns the saved document (201). GET database failures return
+500; POST failures return 400 with a `message` field, following the Trail controller.
+
+Single-item GET, PUT, DELETE, and authentication routes remain scaffolded (501),
+except Trails, which only defines collection GET/POST. Filters are future work.
+Field definitions are listed in `DATA_MODELS.md`. Required POST fields:
+
+| Collection | Required fields |
+| --- | --- |
+| users | name, email (unique), passwordHash |
+| trails | name |
+| events | title, type, category |
+| facilities | name, type, location |
+| weather-readings | location, temperature |
+| broadcasts | eventId, message |
+| hike-registrations | userId, trailId, hikeDate |
+
+Use document `_id` values for reference fields. Mongoose validates field types,
+required fields, and enums; these endpoints do not check that referenced records
+exist. No authentication or access control is implemented yet.
+
+Weather uses the existing `/api/weather-readings` path.
+User creation requires `name`, `email`, and an already prepared `passwordHash`;
+this is a basic data endpoint, not account registration. User GET/POST responses
+omit `passwordHash`. Password hashing and authentication are still TODO.
+Broadcast creation stores a record only; automatic delivery and weather warnings
+remain TODO.
+
+Run the database smoke test with the backend running:
+
+```sh
+npm run test:smoke --prefix server
+```
+
+This creates one clearly labeled test record per model in the configured database
+and leaves them available for inspection. It uses the created User/Trail/Event IDs
+for related records. Use `KTS_API_URL` to override `http://localhost:5001/api`.
 
 ## Authentication
 
