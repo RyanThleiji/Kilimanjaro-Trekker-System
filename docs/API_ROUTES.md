@@ -22,7 +22,19 @@ Use document `_id` values for reference fields. Mongoose validates field types,
 required fields, and enums; these endpoints do not check that referenced records
 exist. No authentication or access control is implemented yet.
 
-Weather uses the existing `/api/weather-readings` path.
+Stored weather readings use the existing `/api/weather-readings` path.
+
+The dashboard and Weather page separately fetch current summit weather directly
+from [Open-Meteo](https://open-meteo.com/en/docs), without a backend or API key.
+`client/src/services/weather.js` requests latitude `-3.07583`, longitude `37.35333`
+([Kilimanjaro summit](https://en.wikipedia.org/wiki/Mount_Kilimanjaro)), and an
+explicit elevation of `5895` meters for the provider's elevation adjustment.
+Temperature is displayed in Fahrenheit, wind in mph, and reading times in
+`Africa/Dar_es_Salaam` (EAT). The UI refreshes every 15 minutes and displays loading
+or unavailable states instead of sample weather when requests fail. These are
+weather model estimates, not on-site measurements. No records are written to
+MongoDB, and no automatic warnings are generated. Other dashboard park cards
+remain labeled sample data.
 User creation requires `name`, `email`, and an already prepared `passwordHash`;
 this is a basic data endpoint, not account registration. User GET/POST responses
 omit `passwordHash`. Password hashing and authentication are still TODO.

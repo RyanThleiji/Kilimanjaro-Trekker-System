@@ -1,11 +1,739 @@
 :root {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #111;
-  background: #fff;
+  --background: #071116;
+  --background-light: #0b171d;
+  --panel: #0e1c22;
+  --panel-hover: #13262e;
+
+  --border: rgba(255, 255, 255, 0.09);
+
+  --text: #f4f1e8;
+  --muted: #9aa8ac;
+
+  --green: #84964a;
+  --green-light: #9eaf5c;
+
+  --warning: #e9ad3c;
+  --danger: #e65e4c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+}
+
+button,
+a {
+  font-family: inherit;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+}
+
+
+/* NAVIGATION */
+
+.navbar {
+  height: 76px;
+  padding: 0 5%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+  z-index: 20;
+
+  background: rgba(6, 15, 20, 0.98);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-mark {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--green);
+  color: #10160c;
+
+  font-weight: 800;
+  letter-spacing: -1px;
+
+  border-radius: 4px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-text strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+}
+
+.brand-text span {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a {
+  color: #d9dedc;
+  text-decoration: none;
+  font-size: 14px;
+
+  transition: 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--green-light);
+}
+
+.login-button {
+  padding: 10px 22px;
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: var(--text);
+
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+
+/* HERO */
+
+.hero {
+  position: relative;
+
+  min-height: 590px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 80px 7%;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(3, 10, 14, 0.96) 0%,
+      rgba(3, 10, 14, 0.72) 44%,
+      rgba(3, 10, 14, 0.24) 100%
+    ),
+    url("./assets/kilimanjaro-hero.png");
+
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      var(--background) 0%,
+      transparent 30%
+    );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+
+  max-width: 680px;
+}
+
+.eyebrow,
+.section-eyebrow {
+  color: var(--green-light);
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.hero h1 {
+  margin: 16px 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(48px, 6vw, 76px);
+  line-height: 0.98;
+  font-weight: 500;
+
+  letter-spacing: -2px;
+}
+
+.hero-content > p {
+  max-width: 540px;
+
+  margin: 25px 0 30px;
+
+  color: #c3cbca;
+
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.primary-button {
+  padding: 15px 25px;
+
+  background: var(--green);
+  border: none;
+
+  color: #11170d;
+  font-weight: 700;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.primary-button:hover {
+  background: var(--green-light);
+  transform: translateY(-1px);
+}
+
+.primary-button span {
+  margin-left: 10px;
+}
+
+
+/* FLOATING WEATHER CARD */
+
+.summit-card {
+  position: absolute;
+
+  right: 7%;
+  bottom: 75px;
+
+  z-index: 3;
+
+  width: 270px;
+
+  padding: 24px;
+
+  background: rgba(11, 24, 30, 0.87);
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+
+  backdrop-filter: blur(13px);
+}
+
+.summit-top {
+  display: flex;
+  justify-content: space-between;
+
+  color: var(--muted);
+
+  font-size: 10px;
+  letter-spacing: 1.8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  background: var(--green-light);
+
+  border-radius: 50%;
+
+  box-shadow: 0 0 10px var(--green-light);
+}
+
+.temperature {
+  margin-top: 20px;
+
+  font-family: Georgia, serif;
+  font-size: 45px;
+}
+
+.weather-label {
+  margin-top: 3px;
+  font-size: 15px;
+}
+
+.weather-details {
+  display: flex;
+  gap: 20px;
+
+  margin: 18px 0;
+
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.summit-card a {
+  color: var(--green-light);
+  text-decoration: none;
+
+  font-size: 12px;
+}
+
+
+/* SHARED SECTION */
+
+.conditions,
+.explore {
+  padding: 65px 7%;
+}
+
+.conditions {
+  background:
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(132, 150, 74, 0.08),
+      transparent 32%
+    ),
+    var(--background);
+}
+
+.explore {
+  background: var(--background-light);
+}
+
+.section-title {
+  margin-bottom: 28px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.section-title h2 {
+  margin: 8px 0 0;
+
+  font-family: Georgia, serif;
+
+  font-size: 36px;
+  font-weight: 500;
+}
+
+.updated {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* CONDITION CARDS */
+
+.condition-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 16px;
+}
+
+.status-card {
+  min-height: 195px;
+
+  padding: 22px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  transition: 0.2s ease;
+}
+
+.status-card:hover {
+  background: var(--panel-hover);
+  transform: translateY(-3px);
+}
+
+.status-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: var(--muted);
+
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.status-icon {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border);
+
+  border-radius: 50%;
+}
+
+.status-card h3 {
+  margin: 25px 0 7px;
+
+  font-family: Georgia, serif;
+
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.status-card p {
+  margin: 0 0 6px;
+
+  font-size: 14px;
+}
+
+.status-card small {
+  color: var(--muted);
+}
+
+.status-card.warning {
+  border-top: 2px solid var(--warning);
+}
+
+.status-card.warning h3 {
+  color: var(--warning);
+}
+
+.status-card.trail h3 {
+  color: var(--green-light);
+}
+
+
+/* EXPLORE */
+
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 16px;
+}
+
+.explore-card {
+  min-height: 230px;
+
+  padding: 26px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(132, 150, 74, 0.08),
+      transparent 45%
+    ),
+    var(--panel);
+
+  border: 1px solid var(--border);
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.explore-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(158, 175, 92, 0.4);
+}
+
+.card-number {
+  color: var(--green-light);
+
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.explore-card h3 {
+  margin: 0 0 10px;
+
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.explore-card p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.card-arrow {
+  position: absolute;
+
+  right: 22px;
+  bottom: 20px;
+
+  color: var(--green-light);
+
+  font-size: 20px;
+}
+
+
+/* CAMERA */
+
+.camera-section {
+  margin: 70px 7%;
+
+  min-height: 260px;
+
+  padding: 50px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(6, 15, 20, 0.97),
+      rgba(6, 15, 20, 0.55)
+    ),
+    url("./assets/kilimanjaro-hero.png");
+
+  background-size: cover;
+  background-position: center 40%;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.camera-content {
+  max-width: 520px;
+}
+
+.camera-content h2 {
+  margin: 7px 0 12px;
+
+  font-family: Georgia, serif;
+  font-size: 36px;
+  font-weight: 500;
+}
+
+.camera-content p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.secondary-button {
+  margin-top: 15px;
+  padding: 12px 20px;
+
+  background: transparent;
+
+  color: var(--text);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+
+.live-badge {
+  padding: 8px 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  background: rgba(5, 13, 17, 0.8);
+
+  font-size: 11px;
+  letter-spacing: 1px;
+
+  border-radius: 3px;
+}
+
+.live-badge span {
+  width: 8px;
+  height: 8px;
+
+  background: #e55244;
+  border-radius: 50%;
+
+  box-shadow: 0 0 8px #e55244;
+}
+
+
+/* FOOTER */
+
+footer {
+  padding: 30px 7%;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: var(--muted);
+
+  border-top: 1px solid var(--border);
+
+  font-size: 12px;
+}
+
+footer div {
+  display: flex;
+  gap: 14px;
+}
+
+footer strong {
+  color: var(--text);
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding: 70px 6%;
+  }
+
+  .summit-card {
+    display: none;
+  }
+
+  .condition-grid,
+  .explore-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .brand-text {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 46px;
+  }
+
+  .conditions,
+  .explore {
+    padding: 45px 20px;
+  }
+
+  .condition-grid,
+  .explore-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .camera-section {
+    margin: 40px 20px;
+    padding: 30px;
+  }
+
+  .live-badge {
+    display: none;
+  }
+
+  footer {
+    padding: 25px 20px;
+  }
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-width: 320px;
+
+  background: #071116;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+/* Keep navigation links styled like the original buttons and cards. */
+.login-button,
+.primary-button,
+.secondary-button,
+.status-card,
+.explore-card {
+  text-decoration: none;
+}
+
+.login-button,
+.primary-button,
+.secondary-button {
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.status-card,
+.explore-card {
+  color: inherit;
 }
 
 .page-shell {
@@ -14,30 +742,48 @@ body {
   padding: 32px 20px;
 }
 
-.dashboard-links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  margin-top: 24px;
+.page-shell p {
+  color: var(--muted);
+  line-height: 1.6;
 }
 
 .back-link {
   display: inline-block;
   margin-top: 24px;
   padding: 10px 16px;
-  border: 1px solid #333;
-  border-radius: 6px;
-  color: #fff;
-  background: #333;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  background: var(--panel);
   text-decoration: none;
 }
 
 .back-link:hover {
-  background: #111;
+  background: var(--panel-hover);
 }
 
-.back-link:focus-visible {
-  outline: 3px solid #2563eb;
-  outline-offset: 3px;
+a:focus-visible {
+  outline: 3px solid var(--green-light);
+  outline-offset: 4px;
+}
+
+.weather-source {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.weather-source a {
+  color: var(--green-light);
+}
+
+.status-dot.unavailable {
+  background: var(--muted);
+  box-shadow: none;
+}
+
+.weather-page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
 }
